@@ -50,9 +50,8 @@ if __name__ == "__main__":
         ) for window in windows]
     )
 
-    
     if args.smooth:
-        np.save("smRets_{}.npy".format(args.scrip), rets)
+        np.save("smoothedRets_{}.npy".format(args.scrip), rets)
     else:
         np.save("Rets_{}.npy".format(args.scrip), rets)
 
