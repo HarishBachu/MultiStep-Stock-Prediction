@@ -45,9 +45,21 @@ if __name__ == "__main__":
         ) for window in windows]
     ) 
 
-    if args.smooth:
-        np.save("smoothedRets_{}.npy".format(args.scrip), rets)
-    else:
-        np.save("Rets_{}.npy".format(args.scrip), rets) 
+    stockWindows = {
+        "window" : windows, 
+        "rets": rets,
+        "dates": list(data.index)
+    }
 
-        
+    if args.smooth:
+        output = open("smoothedRets_{}.pkl".format(args.scrip), "wb")
+        pickle.dump(stockWindows, output)
+        output.close()
+        # np.save("smoothedRets_{}.npy".format(args.scrip), rets)
+    else:
+        output = open("rets_{}.pkl".format(args.scrip), "wb")
+        pickle.dump(stockWindows, output)
+        output.close()
+        # np.save("Rets_{}.npy".format(args.scrip), rets)
+
+
