@@ -9,6 +9,7 @@ from tqdm import tqdm, trange
 
 import yfinance as yf
 import argparse 
+import pickle 
 
 def getWindows(data, windowSize):
     windows = []
@@ -50,8 +51,20 @@ if __name__ == "__main__":
         ) for window in windows]
     )
 
-    if args.smooth:
-        np.save("smoothedRets_{}.npy".format(args.scrip), rets)
-    else:
-        np.save("Rets_{}.npy".format(args.scrip), rets)
+    stockWindows = {
+        "window" : windows, 
+        "rets": rets,
+        "dates": list(data.index)
+    }
 
+
+    if args.smooth:
+        output = open("smoothedRets_{}.pkl", "wb")
+        pickle.dump(stockWindows, output)
+        output.close()
+        # np.save("smoothedRets_{}.npy".format(args.scrip), rets)
+    else:
+        output = open("rets_{}.pkl", "wb")
+        pickle.dump(stockWindows, output)
+        output.close()
+        # np.save("Rets_{}.npy".format(args.scrip), rets)
