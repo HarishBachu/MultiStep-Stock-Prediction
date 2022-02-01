@@ -105,3 +105,19 @@ def getLowFreqComponent(window, order, n=6):
     # print(lowFreq)
     return lowFreq  
     
+#Add Comment for this 
+def findInfrets(window, n=5, order=2, decomp=6):
+    window = getLowFreqComponent(window, order=order, n=decomp)
+    rets = []
+    m = max(window)
+    window = [w/m for w in window]
+    d_window = [window[i+1] - window[i] for i in range(len(window) - 1)]
+
+    for idx in range(len(d_window) - 1):
+        if d_window[idx] < 0 and d_window[idx+1] >= 0:
+            rets.append(window[idx]*m)
+        elif d_window[idx] >= 0 and d_window[idx+1] >= 0:
+            rets.append(window[idx]*m)
+
+    return rets, d_window 
+
