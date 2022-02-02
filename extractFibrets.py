@@ -59,12 +59,12 @@ if __name__ == "__main__":
 
 
     if args.smooth:
-        output = open("smoothedRets_{}.pkl".format(args.scrip), "wb")
+        output = open("smoothedFibrets_{}.pkl".format(args.scrip), "wb")
         pickle.dump(stockWindows, output)
         output.close()
         # np.save("smoothedRets_{}.npy".format(args.scrip), rets)
     else:
-        output = open("rets_{}.pkl".format(args.scrip), "wb")
+        output = open("Fibrets_{}.pkl".format(args.scrip), "wb")
         pickle.dump(stockWindows, output)
         output.close()
         # np.save("Rets_{}.npy".format(args.scrip), rets)
